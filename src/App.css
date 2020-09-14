@@ -1,0 +1,144 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.AddValue{
+  text-align: center;
+  margin: 10px;
+}
+
+.ShowValue{
+  text-align: center;
+  margin: 10px;
+}
+
+.ShowValue table{
+  width: 100%;
+}
+
+.listOfValues{
+  text-align: center;
+  margin: 10px;
+}
+
+.filter-box{
+  border: 3px solid rgb(73, 79, 82);
+  height: 200px;
+  width: 100px;
+  position: absolute;
+  background-color: #7e8d96;
+}
+
+.filter-box label{
+  color: white;
+}
+
+.filter-box input{
+  padding: 0px;
+}
+
+.list-table{
+  position: relative;
+  left: 120px;
+}
+
+.slider{
+  width: 80%;
+}
+
+input{
+  width: 40%;
+  padding: 12px 5px;
+  margin: 0px 0px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button{
+  width: 20%;
+  background-color: #7e8d96;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.reset{
+  width: 45%;
+  background-color: white;
+  color: black;
+  padding: 0px 0px;
+  margin: 0px 2px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.search{
+  width: 45%;
+  background-color: white;
+  color: black;
+  padding: 0px 0px;
+  margin: 0px 2px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.nav{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10vh;
+  background-color: rgb(73, 79, 82);
+  color: white;
+}
+
+.nav-item{
+  color: white;
+  text-decoration: none;
+  list-style: none;
+  margin: 10px 100px 10px 100px;
+  padding: 10px;
+}
+
+.nav li:hover{
+  color: black;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.footer{
+  padding-top: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  min-height: 5vh;
+  background-color: rgb(73, 79, 82);
+  color: white;
+}
+
+table {
+  border-collapse: collapse;
+  width: 90%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: rgb(91, 107, 116);
+  color: white;
+}
