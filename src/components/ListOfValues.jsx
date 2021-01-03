@@ -35,17 +35,7 @@ class ListOfValues extends Component {
             })
     }
 
-    capital_letter = (str) => {
-        str = str.split(" ");
-
-        for (var i = 0, x = str.length; i < x; i++) {
-            str[i] = str[i][0].toUpperCase() + str[i].substr(1);
-        }
-
-        return str.join(" ");
-    }
-
-    edit = (_id)=>{
+    edit = (_id) => {
         this.setState({
             edit: !this.state.edit
         })
@@ -56,14 +46,14 @@ class ListOfValues extends Component {
             phone: this.state.editPhone,
             salary: this.state.editSalary
         })
-        .then(response=>{
-            this.fetchUser()
-        })
-        .catch(error=>{
-            this.setState({
-                message: 'Unable to edit'
+            .then(response => {
+                this.fetchUser()
             })
-        })
+            .catch(error => {
+                this.setState({
+                    message: 'Unable to edit'
+                })
+            })
 
         this.setState({
             editName: '',
@@ -73,19 +63,19 @@ class ListOfValues extends Component {
         })
     }
 
-    delete = (_id)=>{
-        axios.post('http://localhost:3003/list-of-value-delete', {_id: _id})
-        .then(response=>{
-            this.fetchUser()
-            this.setState({
-                message: 'Successfully Deleted!'
+    delete = (_id) => {
+        axios.post('http://localhost:3003/list-of-value-delete', { _id: _id })
+            .then(response => {
+                this.fetchUser()
+                this.setState({
+                    message: 'Successfully Deleted!'
+                })
             })
-        })
-        .catch(error=>{
-            this.setState({
-                message: 'Unable to delete'
+            .catch(error => {
+                this.setState({
+                    message: 'Unable to delete'
+                })
             })
-        })
     }
 
     componentDidMount() {
@@ -93,13 +83,13 @@ class ListOfValues extends Component {
     }
 
     render() {
-        let editHtml;
+        let editHtml
         if (this.state.edit) {
             editHtml = <span>
-                <input type='text' placeholder="Edit Name" value={this.state.editName} onChange={event => this.setState({editName: event.target.value})}></input>
-                <input type='email' placeholder="Edit Email" value={this.state.editEmail} onChange={event => this.setState({editEmail: event.target.value})}></input>
-                <input type='number' placeholder="Edit Phone" value={this.state.editPhone} onChange={event => this.setState({editPhone: event.target.value})}></input>
-                <input type='number' placeholder="Salary" value={this.state.editSalary} onChange={event => this.setState({editSalary: event.target.value})}></input>
+                <input type='text' placeholder="Edit Name" value={this.state.editName} onChange={event => this.setState({ editName: event.target.value })}></input>
+                <input type='email' placeholder="Edit Email" value={this.state.editEmail} onChange={event => this.setState({ editEmail: event.target.value })}></input>
+                <input type='number' placeholder="Edit Phone" value={this.state.editPhone} onChange={event => this.setState({ editPhone: event.target.value })}></input>
+                <input type='number' placeholder="Salary" value={this.state.editSalary} onChange={event => this.setState({ editSalary: event.target.value })}></input>
             </span>
         }
         else {
@@ -107,100 +97,64 @@ class ListOfValues extends Component {
         }
 
         let searched
-        let capitalName
         if (this.state.searchByName !== '') {
-            if(this.state.searchByName !== this.capital_letter(this.state.searchByName)){
-                capitalName = this.capital_letter(this.state.searchByName)
-            }
-            else{
-                capitalName = this.state.searchByName
-            }
-            searched = this.state.data.filter(item => item.name == capitalName)
+            searched = this.state.data.filter(item => item.name.toLowerCase().includes(this.state.searchByName.toLowerCase()))
         }
         else {
             searched = this.state.data
         }
-        if (this.props.filterSalary === '') {
-            return (
-                <div className="listOfValues">
-                    <br />
-                    <h2>List Of Values</h2>
-                    <br />
-                    <input type='text' placeholder='Search By Name' onChange={event => this.setState({ searchByName: event.target.value })}></input>
-                    <br />
-                    {this.state.message}
-                    <br />
-                    <Filter></Filter>
-                    <br />
-                    {editHtml}
-                    <br />
-                    <table className='list-table'>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Salary</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {searched.map(item => <tr key={item._id}>
+
+        let filteredData = searched.filter((item) => item.salary == this.props.filterSalary)
+
+        return (
+            <div className='listOfValues'>
+                <br />
+                <h2>List Of Values</h2>
+                <br />
+                <input type='text' placeholder='Search By Name' onChange={event => this.setState({ searchByName: event.target.value })}></input>
+                <br />
+                {this.state.message}
+                <br />
+                {editHtml}
+                <br />
+                <Filter></Filter>
+                <br />
+                <table className='list-table'>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Salary</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.props.filterSalary === '' ? searched.map(
+                            item => <tr key={item._id}>
                                 <td>{item.name}</td>
                                 <td>{item.email}</td>
                                 <td>{item.phone}</td>
                                 <td>{item.salary}</td>
-                                <td><button className='edit-button' onClick={()=>this.edit(item._id)}>Edit</button></td>
-                                <td><button className='delete-button' onClick={()=>this.delete(item._id)}>Delete</button></td>
-                            </tr>)}
-                        </tbody>
-                    </table>
-                    <br></br>
-                </div>
-            )
-        }
-        else {
-            let filteredData = searched.filter((item) => item.salary == this.props.filterSalary)
-            console.log(filteredData)
-            return (
-                <div className='listOfValues'>
-                    <br />
-                    <h2>List Of Values</h2>
-                    <br />
-                    <input type='text' placeholder='Search By Name' onChange={event => this.setState({ searchByName: event.target.value })}></input>
-                    <br />
-                    {this.state.message}
-                    <br />
-                    {editHtml}
-                    <br />
-                    <Filter></Filter>
-                    <br />
-                    <table className='list-table'>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Salary</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <td><button className='edit-button' onClick={() => this.edit(item._id)}>Edit</button></td>
+                                <td><button className='delete-button' onClick={() => this.delete(item._id)}>Delete</button></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {filteredData.map(item => <tr key={item._id}>
+                        ) : filteredData.map(
+                            item => <tr key={item._id}>
                                 <td>{item.name}</td>
                                 <td>{item.email}</td>
                                 <td>{item.phone}</td>
                                 <td>{item.salary}</td>
-                                <td><button className='edit-button' onClick={()=>this.edit(item._id)}>Edit</button></td>
-                                <td><button className='delete-button' onClick={()=>this.delete(item._id)}>Delete</button></td>
-                            </tr>)}
-                        </tbody>
-                    </table>
-                </div>
-            )
-        }
+                                <td><button className='edit-button' onClick={() => this.edit(item._id)}>Edit</button></td>
+                                <td><button className='delete-button' onClick={() => this.delete(item._id)}>Delete</button></td>
+                            </tr>
+                        )
+                        }
+                    </tbody>
+                </table>
+            </div>
+        )
     }
 }
 
