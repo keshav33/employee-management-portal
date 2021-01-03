@@ -14,7 +14,7 @@ function Navbar() {
                     <li className="nav-item">Add Value</li>
                 </Link>
                 <Link style={navStyle} to='/show-value'>
-                    <li className="nav-item">Show Value</li>
+                    <li className="nav-item">Recently Added</li>
                 </Link>
                 <Link style={navStyle} to='/list-of-values'>
                     <li className="nav-item">List Of Values</li>

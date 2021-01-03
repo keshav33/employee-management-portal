@@ -119,40 +119,42 @@ class ListOfValues extends Component {
                 <br />
                 <Filter></Filter>
                 <br />
-                <table className='list-table'>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Salary</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.filterSalary === '' ? searched.map(
-                            item => <tr key={item._id}>
-                                <td>{item.name}</td>
-                                <td>{item.email}</td>
-                                <td>{item.phone}</td>
-                                <td>{item.salary}</td>
-                                <td><button className='edit-button' onClick={() => this.edit(item._id)}>Edit</button></td>
-                                <td><button className='delete-button' onClick={() => this.delete(item._id)}>Delete</button></td>
+                <div class="scrollit">
+                    <table className='list-table'>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Salary</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
-                        ) : filteredData.map(
-                            item => <tr key={item._id}>
-                                <td>{item.name}</td>
-                                <td>{item.email}</td>
-                                <td>{item.phone}</td>
-                                <td>{item.salary}</td>
-                                <td><button className='edit-button' onClick={() => this.edit(item._id)}>Edit</button></td>
-                                <td><button className='delete-button' onClick={() => this.delete(item._id)}>Delete</button></td>
-                            </tr>
-                        )
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {this.props.filterSalary === '' ? searched.map(
+                                item => <tr key={item._id}>
+                                    <td>{item.name}</td>
+                                    <td>{item.email}</td>
+                                    <td>{item.phone}</td>
+                                    <td>{item.salary}</td>
+                                    <td><button className='edit-button' onClick={() => this.edit(item._id)}>Edit</button></td>
+                                    <td><button className='delete-button' onClick={() => this.delete(item._id)}>Delete</button></td>
+                                </tr>
+                            ) : filteredData.map(
+                                item => <tr key={item._id}>
+                                    <td>{item.name}</td>
+                                    <td>{item.email}</td>
+                                    <td>{item.phone}</td>
+                                    <td>{item.salary}</td>
+                                    <td><button className='edit-button' onClick={() => this.edit(item._id)}>Edit</button></td>
+                                    <td><button className='delete-button' onClick={() => this.delete(item._id)}>Delete</button></td>
+                                </tr>
+                            )
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     }
