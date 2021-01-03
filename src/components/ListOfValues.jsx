@@ -53,6 +53,11 @@ class ListOfValues extends Component {
                 this.setState({
                     message: 'Unable to edit'
                 })
+                setTimeout(() => {
+                    this.setState({
+                        message: ''
+                    })
+                }, 5000);
             })
 
         this.setState({
@@ -70,11 +75,21 @@ class ListOfValues extends Component {
                 this.setState({
                     message: 'Successfully Deleted!'
                 })
+                setTimeout(() => {
+                    this.setState({
+                        message: ''
+                    })
+                }, 5000);
             })
             .catch(error => {
                 this.setState({
                     message: 'Unable to delete'
                 })
+                setTimeout(() => {
+                    this.setState({
+                        message: ''
+                    })
+                }, 5000);
             })
     }
 
@@ -132,7 +147,7 @@ class ListOfValues extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.filterSalary === '' ? searched.map(
+                            {this.state.data.length > 0 ? this.props.filterSalary === '' ? searched.map(
                                 item => <tr key={item._id}>
                                     <td>{item.name}</td>
                                     <td>{item.email}</td>
@@ -150,7 +165,9 @@ class ListOfValues extends Component {
                                     <td><button className='edit-button' onClick={() => this.edit(item._id)}>Edit</button></td>
                                     <td><button className='delete-button' onClick={() => this.delete(item._id)}>Delete</button></td>
                                 </tr>
-                            )
+                            ) : <tr>
+                                    <td>No Data Found</td>
+                                </tr>
                             }
                         </tbody>
                     </table>
