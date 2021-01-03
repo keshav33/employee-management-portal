@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import {addName, addEmail, addPhone, addSalary} from '../redux/redux'
+import { connect } from 'react-redux'
+import { addName, addEmail, addPhone, addSalary } from '../redux/redux'
 import '../App.css'
 import axios from 'axios'
 
@@ -15,8 +15,8 @@ class AddValue extends Component {
         }
     }
 
-    addValue = ()=>{
-        if(this.state.name.length>0 && this.state.email.length>0 && this.state.phone.length>0 && this.state.salary.length>0){
+    addValue = () => {
+        if (this.state.name.length > 0 && this.state.email.length > 0 && this.state.phone.length > 0 && this.state.salary.length > 0) {
             console.log(this.state.name, this.state.email, this.state.phone, this.state.salary)
             this.props.addName(this.state.name)
             this.props.addEmail(this.state.email)
@@ -35,7 +35,7 @@ class AddValue extends Component {
                     console.log(error)
                 })
         }
-        else{
+        else {
             alert("Input can't be blank.. please fill in some value")
         }
         this.setState({
@@ -49,48 +49,48 @@ class AddValue extends Component {
     render() {
         return (
             <div className='AddValue'>
-            <h2>
-                Add Value
+                <h2>
+                    Add Value
             </h2>
-            <br/>
+                <br />
+                <div>
                     <div>
-                        <div>
-                            <label>Name</label>
-                        </div>
-                        <input type="text" name="name" placeholder="Enter your name" value={this.state.name} onChange={event => this.setState({ name: event.target.value })}></input>
+                        <label>Name</label>
                     </div>
-                    <br />
+                    <input type="text" name="name" placeholder="Enter your name" value={this.state.name} onChange={event => this.setState({ name: event.target.value })}></input>
+                </div>
+                <br />
+                <div>
                     <div>
-                        <div>
-                            <label>Email</label>
-                        </div>
-                        <input type="email" name="email" placeholder="Enter your email" value={this.state.email} onChange={event => this.setState({ email: event.target.value })}></input>
+                        <label>Email</label>
                     </div>
-                    <br />
+                    <input type="email" name="email" placeholder="Enter your email" value={this.state.email} onChange={event => this.setState({ email: event.target.value })}></input>
+                </div>
+                <br />
+                <div>
                     <div>
-                        <div>
-                            <label>Phone Number</label>
-                        </div>
-                        <input type='number' name="phone" placeholder="Enter phone number" value={this.state.phone} onChange={event => this.setState({ phone: event.target.value })}></input>
+                        <label>Phone Number</label>
                     </div>
-                    <br />
+                    <input type='number' name="phone" placeholder="Enter phone number" value={this.state.phone} onChange={event => this.setState({ phone: event.target.value })}></input>
+                </div>
+                <br />
+                <div>
                     <div>
-                        <div>
-                            <label>Salary</label>
-                        </div>
-                        <input type='number' name="salary" placeholder="Enter your salary" value={this.state.salary} onChange={event => this.setState({ salary: event.target.value })}></input>
+                        <label>Salary</label>
                     </div>
-                    <br />
-                    <div>
-                        <button onClick={()=>this.addValue()}>Add Value</button>
-                    </div>
+                    <input type='number' name="salary" placeholder="Enter your salary" value={this.state.salary} onChange={event => this.setState({ salary: event.target.value })}></input>
+                </div>
+                <br />
+                <div>
+                    <button onClick={() => this.addValue()}>Add Value</button>
+                </div>
             </div>
         )
     }
 }
 
-const mapStateToProps = state =>{
-    return{
+const mapStateToProps = state => {
+    return {
         name: state.name,
         email: state.email,
         phone: state.phone,
@@ -98,8 +98,8 @@ const mapStateToProps = state =>{
     }
 }
 
-const mapDispatchToProps = dispatch =>{
-    return{
+const mapDispatchToProps = dispatch => {
+    return {
         addName: name => dispatch(addName(name)),
         addEmail: email => dispatch(addEmail(email)),
         addPhone: phone => dispatch(addPhone(phone)),
@@ -107,4 +107,4 @@ const mapDispatchToProps = dispatch =>{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(AddValue)
+export default connect(mapStateToProps, mapDispatchToProps)(AddValue)
