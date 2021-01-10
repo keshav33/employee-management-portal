@@ -5,6 +5,7 @@ const ADD_EMAIL = 'ADD_EMAIL'
 const ADD_PHONE = 'ADD_PHONE'
 const ADD_SALARY = 'ADD_SALARY'
 const FILTER_SALARY = 'FILTER_SALARY'
+const AUTHORIZED = 'AUTHORIZED'
 
 export function addName(name) {
     return {
@@ -41,16 +42,29 @@ export function filterSalary(salary) {
     }
 }
 
+export function authorized(auth) {
+    return {
+        type: AUTHORIZED,
+        payload: auth
+    }
+}
+
 const initialState = {
     name: '',
     email: '',
     phone: '',
     salary: '',
-    filterSalary: ''
+    filterSalary: '',
+    isAuthorized: false
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case AUTHORIZED:
+            return {
+                ...state,
+                isAuthorized: action.payload
+            }
         case ADD_NAME:
             return {
                 ...state,

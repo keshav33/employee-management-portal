@@ -98,6 +98,16 @@ class ListOfValues extends Component {
     }
 
     render() {
+        if (!this.props.isAuthorized) {
+            return (
+                <>
+                    <br />
+                    <h1 style={{ textAlign: 'center',  color: 'red' }}>
+                        Unauthorized
+                </h1>
+                </>
+            )
+        }
         let editHtml
         if (this.state.edit) {
             editHtml = <span>
@@ -183,7 +193,8 @@ const mapStateToProps = state => {
         email: state.email,
         phone: state.phone,
         salary: state.salary,
-        filterSalary: state.filterSalary
+        filterSalary: state.filterSalary,
+        isAuthorized: state.isAuthorized
     }
 }
 

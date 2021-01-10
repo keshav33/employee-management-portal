@@ -11,7 +11,8 @@ class AddValue extends Component {
             name: '',
             email: '',
             phone: '',
-            salary: ''
+            salary: '',
+            message: ''
         }
     }
 
@@ -32,7 +33,9 @@ class AddValue extends Component {
                     console.log(response.data)
                 })
                 .catch(error => {
-                    console.log(error)
+                    this.setState({
+                        message: 'Something went wrong'
+                    })
                 })
         }
         else {
@@ -47,11 +50,22 @@ class AddValue extends Component {
     }
 
     render() {
+        if (!this.props.isAuthorized) {
+            return (
+                <>
+                    <br />
+                    <h1 style={{ textAlign: 'center',  color: 'red' }}>
+                        Unauthorized
+                </h1>
+                </>
+            )
+        }
         return (
             <div className='AddValue'>
                 <h2>
                     Add Value
             </h2>
+                <p>{this.state.message}</p>
                 <br />
                 <div>
                     <div>
@@ -94,7 +108,8 @@ const mapStateToProps = state => {
         name: state.name,
         email: state.email,
         phone: state.phone,
-        salary: state.salary
+        salary: state.salary,
+        isAuthorized: state.isAuthorized
     }
 }
 

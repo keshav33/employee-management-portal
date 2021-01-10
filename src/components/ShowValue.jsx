@@ -10,6 +10,16 @@ class ShowValue extends Component {
     }
 
     render() {
+        if (!this.props.isAuthorized) {
+            return (
+                <>
+                    <br />
+                    <h1 style={{ textAlign: 'center',  color: 'red' }}>
+                        Unauthorized
+                </h1>
+                </>
+            )
+        }
         let data = `No Data Found`
         if (this.props.name.length > 0 && this.props.email.length > 0 && this.props.phone.length > 0 && this.props.salary > 0) {
             data = ``
@@ -50,7 +60,8 @@ const mapStateToProps = state => {
         email: state.email,
         phone: state.phone,
         salary: state.salary,
-        filterSalary: state.filterSalary
+        filterSalary: state.filterSalary,
+        isAuthorized: state.isAuthorized
     }
 }
 

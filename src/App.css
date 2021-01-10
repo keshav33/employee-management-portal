@@ -12,6 +12,16 @@ body{
   margin: 10px;
 }
 
+.Login{
+  text-align: center;
+  margin: 10px;
+}
+
+.Signup{
+  text-align: center;
+  margin: 10px;
+}
+
 .scrollit {
   overflow:scroll;
   height:60vh;
