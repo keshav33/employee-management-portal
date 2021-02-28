@@ -18,7 +18,8 @@ class ListOfValues extends Component {
             editName: '',
             editEmail: '',
             editPhone: '',
-            editSalary: ''
+            editSalary: '',
+            editToggle: false
         }
     }
 
@@ -152,8 +153,9 @@ class ListOfValues extends Component {
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Salary</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                {this.state.editToggle ? <th>Edit</th> : null}
+                                {this.state.editToggle ? <th>Delete</th> : null}
+                                <th><button onClick={()=> this.setState({editToggle: !this.state.editToggle})}>Modify</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -163,8 +165,13 @@ class ListOfValues extends Component {
                                     <td>{item.email}</td>
                                     <td>{item.phone}</td>
                                     <td>{item.salary}</td>
-                                    <td><button className='edit-button' onClick={() => this.edit(item._id)}>Edit</button></td>
-                                    <td><button className='delete-button' onClick={() => this.delete(item._id)}>Delete</button></td>
+                                    {this.state.editToggle ?
+                                        <>
+                                        <td><button className='edit-button' onClick={() => this.edit(item._id)}>Edit</button></td>
+                                        <td><button className='delete-button' onClick={() => this.delete(item._id)}>Delete</button></td>
+                                        </>
+                                        : null
+                                    }
                                 </tr>
                             ) : filteredData.map(
                                 item => <tr key={item._id}>
@@ -172,8 +179,13 @@ class ListOfValues extends Component {
                                     <td>{item.email}</td>
                                     <td>{item.phone}</td>
                                     <td>{item.salary}</td>
-                                    <td><button className='edit-button' onClick={() => this.edit(item._id)}>Edit</button></td>
-                                    <td><button className='delete-button' onClick={() => this.delete(item._id)}>Delete</button></td>
+                                    {this.state.editToggle ?
+                                        <>
+                                        <td><button className='edit-button' onClick={() => this.edit(item._id)}>Edit</button></td>
+                                        <td><button className='delete-button' onClick={() => this.delete(item._id)}>Delete</button></td>
+                                        </>
+                                        : null
+                                    }
                                 </tr>
                             ) : <tr>
                                     <td>No Data Found</td>

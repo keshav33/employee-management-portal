@@ -25,6 +25,7 @@ class Login extends Component {
                     this.setState({
                         message: 'Login Successful'
                     })
+                    this.props.history.push('/add-value')
                 }
                 else{
                     this.props.authorized(false)
